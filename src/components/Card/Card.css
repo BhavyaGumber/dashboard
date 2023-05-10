@@ -7,6 +7,7 @@
   padding: 1rem;
   position: relative;
   cursor: pointer;
+  width:25vw;
 }
 .CompactCard:hover {
   box-shadow: none !important;
@@ -93,6 +94,12 @@
     height: 45vh;
     left: 6rem;
   }
+  .CompactCard{
+    width:30vw;
+   
+    
+    
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -101,5 +108,9 @@
     height: 50%;
     left: 25px;
     width: 80%;
+  }
+  .CompactCard{
+    width:28vw;
+    gap:1200px;
   }
 }

@@ -1,86 +1,77 @@
 import * as React from "react";
 import Table from "@mui/material/Table";
+import { useState,useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { setCheckedRows } from "../../redux/actions";
+import Footer from "../Footer/Footer";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { MenuItem, FormControl, Select,InputLabel, Checkbox} from "@material-ui/core";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
+export default function BasicTable({headings, dataArray,sharedState}) {
+  const dispatch = useDispatch();
+  const checkedRows = useSelector(state=>state.checkedRows);
+  // const [checkedRows, setCheckedRows] = useState([]);
+  const handleCheckBoxChange = (index) => {
+    const updatedRows = checkedRows.includes(index)
+      ? checkedRows.filter(id => id !== index)
+      : [...checkedRows, index];
 
-function createData(name, trackingId, date, status) {
-  return { name, trackingId, date, status };
-}
+    dispatch(setCheckedRows(updatedRows));
+  };
 
-const rows = [
-  createData("Lasania Chiken Fri", 18908424, "2 March 2022", "Approved"),
-  createData("Big Baza Bang ", 18908424, "2 March 2022", "Pending"),
-  createData("Mouth Freshner", 18908424, "2 March 2022", "Approved"),
-  createData("Cupcake", 18908421, "2 March 2022", "Delivered"),
-];
-
-
-const makeStyle=(status)=>{
-  if(status === 'Approved')
-  {
-    return {
-      background: 'rgb(145 254 159 / 47%)',
-      color: 'green',
-    }
-  }
-  else if(status === 'Pending')
-  {
-    return{
-      background: '#ffadad8f',
-      color: 'red',
-    }
-  }
-  else{
-    return{
-      background: '#59bfff',
-      color: 'white',
-    }
-  }
-}
-
-export default function BasicTable() {
-  return (
+  useEffect(()=>{
+    console.log(checkedRows)
+  },[checkedRows]);
+  const isDropDownDisabled = checkedRows.length>0;
+ 
+ return (
       <div className="Table">
-      <h3>Recent Orders</h3>
+      <h3>Recent Data</h3>
         <TableContainer
           component={Paper}
           style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
+          sx={{width:900,height:300}}
         >
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ width:"max-content",height:"max-content" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Product</TableCell>
-                <TableCell align="left">Tracking ID</TableCell>
-                <TableCell align="left">Date</TableCell>
-                <TableCell align="left">Status</TableCell>
-                <TableCell align="left"></TableCell>
+              <TableCell>Action</TableCell>
+              {/* <TableCell>Option_Type</TableCell> */}
+              {headings.map((heading, index)=>{
+                return (
+                <TableCell key={index}>{heading}</TableCell>
+                )
+              })}
               </TableRow>
-            </TableHead>
+          </TableHead>
             <TableBody style={{ color: "white" }}>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="left">{row.trackingId}</TableCell>
-                  <TableCell align="left">{row.date}</TableCell>
-                  <TableCell align="left">
-                    <span className="status" style={makeStyle(row.status)}>{row.status}</span>
-                  </TableCell>
-                  <TableCell align="left" className="Details">Details</TableCell>
+           
+              {dataArray.map((row,index) => (
+                <>
+    
+                 <TableRow key={index}>
+                 <TableCell style={{ width: "2px", height: "2px" ,margin:0, padding:0}}>
+                 <Checkbox checked={checkedRows.includes(index)} onChange={()=>handleCheckBoxChange(index)}/>
+                 </TableCell>
+                  {headings.map((heading)=>(
+                  <TableCell key={heading}>{row[heading]}</TableCell>
+                  ))}
                 </TableRow>
+                </>
               ))}
-            </TableBody>
+              </TableBody>
+               
+              
           </Table>
         </TableContainer>
+        
       </div>
   );
 }

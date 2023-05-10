@@ -8,6 +8,7 @@ import Chart from "react-apexcharts";
 
 // parent Card
 
+
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -43,7 +44,7 @@ function CompactCard({ param, setExpanded }) {
       </div>
       <div className="detail">
         <Png />
-        <span>${param.value}</span>
+        <span>{param.value}</span>
         <span>Last 24 hours</span>
       </div>
     </motion.div>

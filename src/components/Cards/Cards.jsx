@@ -4,7 +4,7 @@ import { cardsData } from "../../Data/Data";
 
 import Card from "../Card/Card";
 
-const Cards = () => {
+const Cards = (props) => {
   return (
     <div className="Cards">
       {cardsData.map((card, id) => {
@@ -14,7 +14,7 @@ const Cards = () => {
               title={card.title}
               color={card.color}
               barValue={card.barValue}
-              value={card.value}
+              value={props.mtmSum}
               png={card.png}
               series={card.series}
             />

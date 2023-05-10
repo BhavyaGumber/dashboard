@@ -1,5 +1,6 @@
-.MuiTableRow-root > * {
-  padding: 10px;
+.MuiTableRow-root{
+  padding:0;
+  margin:0;
 }
 
 .MuiTableRow-root.MuiTableRow-head > * {
@@ -14,19 +15,13 @@ th {
 .Table:first-child {
   border-radius: 0.7rem !important;
 }
-.status {
-  padding: 8px;
-  border-radius: 9px;
-}
 
-.Details {
-  color: #00b5ff !important;
-}
+
 
 @media screen and (max-width: 1200px) {
   .Table {
     width: 170%;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 }
 
