@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import "./Footer.css"
 import { setDropdownValue } from '../../redux/actions';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
