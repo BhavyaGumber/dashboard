@@ -1,6 +1,10 @@
-.MuiTableRow-root{
-  padding:0;
+.MuiTableRow-root *>{
+  padding:10px;
   margin:0;
+  overflow:auto;
+}
+.MuiTableRow-root{
+  width:100%;
 }
 
 .MuiTableRow-root.MuiTableRow-head > * {
@@ -34,4 +38,7 @@ th {
     align-items: center;
     width: 23rem;
   }
+}
+.Table{
+  margin-top:-2rem;
 }

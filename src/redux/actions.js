@@ -4,3 +4,9 @@ export const setCheckedRows = (checkedRows) => {
       payload: checkedRows,
     };
   };
+  export const setDropdownValue = (dropdownId,value) => {
+    return {
+      type: 'SET_DROPDOWN_VALUE',
+      payload: {dropdownId,value},
+    };
+  };

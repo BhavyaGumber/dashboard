@@ -14,10 +14,10 @@ import TableRow from "@mui/material/TableRow";
 import { MenuItem, FormControl, Select,InputLabel, Checkbox} from "@material-ui/core";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
-export default function BasicTable({headings, dataArray,sharedState}) {
+export default function BasicTable({headData, sortedData}) {
   const dispatch = useDispatch();
   const checkedRows = useSelector(state=>state.checkedRows);
-  // const [checkedRows, setCheckedRows] = useState([]);
+  
   const handleCheckBoxChange = (index) => {
     const updatedRows = checkedRows.includes(index)
       ? checkedRows.filter(id => id !== index)
@@ -30,21 +30,22 @@ export default function BasicTable({headings, dataArray,sharedState}) {
     console.log(checkedRows)
   },[checkedRows]);
   const isDropDownDisabled = checkedRows.length>0;
+  const checkboxesDisabled = useSelector((state) => state.checkboxesDisabled);
  
  return (
-      <div className="Table">
-      <h3>Recent Data</h3>
+      <div style={{backgroundColor:"black"}} className="Table">
+     
         <TableContainer
           component={Paper}
-          style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
-          sx={{width:900,height:300}}
+          style={{boxShadow: "0px 13px 20px 0px #80808029"}}
+          sx={{width:"100%",height:400}}
         >
           <Table sx={{ width:"max-content",height:"max-content" }} aria-label="simple table">
             <TableHead>
               <TableRow>
               <TableCell>Action</TableCell>
               {/* <TableCell>Option_Type</TableCell> */}
-              {headings.map((heading, index)=>{
+              {headData.map((heading, index)=>{
                 return (
                 <TableCell key={index}>{heading}</TableCell>
                 )
@@ -53,14 +54,14 @@ export default function BasicTable({headings, dataArray,sharedState}) {
           </TableHead>
             <TableBody style={{ color: "white" }}>
            
-              {dataArray.map((row,index) => (
+              {sortedData.map((row,index) => (
                 <>
     
                  <TableRow key={index}>
                  <TableCell style={{ width: "2px", height: "2px" ,margin:0, padding:0}}>
-                 <Checkbox checked={checkedRows.includes(index)} onChange={()=>handleCheckBoxChange(index)}/>
+                 <Checkbox disabled={checkboxesDisabled} checked={checkedRows.includes(index)} onChange={()=>handleCheckBoxChange(index)}/>
                  </TableCell>
-                  {headings.map((heading)=>(
+                  {headData.map((heading)=>(
                   <TableCell key={heading}>{row[heading]}</TableCell>
                   ))}
                 </TableRow>

@@ -6,10 +6,10 @@ import Card from "../Card/Card";
 
 const Cards = (props) => {
   return (
-    <div className="Cards">
+    <div style={{gap:"-10px"}} className="Cards">
       {cardsData.map((card, id) => {
         return (
-          <div className="parentContainer" key={id}>
+          <div  style={{gap:"10px"}} className="parentContainer" key={id}>
             <Card
               title={card.title}
               color={card.color}
